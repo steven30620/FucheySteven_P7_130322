@@ -1,16 +1,17 @@
 <template>
-    <div id="main-signin">
-            <SignUpComponent/>
+    <div id="main-page-header">
+            <PublicationComponent/>
     </div>
 </template>
 
 <script>
-import SignUpComponent from '../components/acceuil/SignUpComponent.vue'
+import PublicationComponent from '../components/publication/PublicationComponent.vue'
 
 export default {
     name : 'RegisterView',  
     components:{
-        SignUpComponent
+        PublicationComponent
+
     }  
 
 }
@@ -18,7 +19,7 @@ export default {
 
 <style scopped>
  
- #main-signin{
+ #main-page-header{
      
      display: flex;
      justify-content: center;
