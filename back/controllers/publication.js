@@ -1,27 +1,17 @@
 const Post = require("../models/Publication");
+const Comment = require("../models/Publication");
 const fs = require("fs");
 const connection = require("../middleware/connection");
 
 exports.createPost = (req, res, next) => {
-	//création d'un post avec initialisation des likes
-	const otherFields = {
-		likes: 0,
-		usersLiked: [],
-		imageUrl: "http://localhost:3000/" + req.file.path.replace("\\", "/"), //ajout de l'image dans la base de données
-	};
 	const postTitle = req.body.postTitle;
 	const postContent = req.body.postContent;
-	const postImage = req.body.postImage;
-	const userId = req.body.userId;
-
-	const post = new Post({
-		// création d'un nouvel objet post avec tout les champs correspondant
-		...otherFields,
-	});
+	const postImage = "ee";
+	const userId = req.userId;
 
 	connection.execute(
 		"INSERT INTO `post` (title ,content ,image , userId) VALUES (?,?,?,?)",
-		[title, content, image, userId],
+		[postTitle, postContent, postImage, userId],
 		function (err, result, fields) {
 			if (err) {
 				return res.status(500).json({ error: err });
@@ -83,18 +73,61 @@ exports.createPost = (req, res, next) => {
 // 		.catch((error) => res.status(500).json({ error }));
 // };
 
-// exports.getAllSauces = (req, res, next) => {
-// 	//récupération de toute les sauces de la BdD pour les afficher sur la pages
-// 	Sauce.find() // find retourne une promesse,
-// 		.then((sauces) => {
-// 			res.status(200).json(sauces); //retourne le tableau des sauces renvoyé par la méthode find
-// 		})
-// 		.catch((error) => {
-// 			res.status(400).json({
-// 				error: error,
-// 			});
-// 		});
-// };
+exports.getAllPosts = (req, res, next) => {
+	//récupération de toute les sauces de la BdD pour les afficher sur la pages
+	connection.execute(
+		"SELECT post.*, post.id as postId, user.* FROM `post` JOIN user ON post.userId = user.id",
+		[],
+		function (err, result, fields) {
+			console.log(err);
+			if (err) {
+				return res.status(500).json({ error: err });
+			}
+			return res
+				.status(200)
+				.json({ message: "post bien récupéré !", posts: result });
+		}
+	);
+};
+
+exports.createComment = (req, res, next) => {
+	const commentContent = req.body.commentContent;
+	const postId = req.body.postId;
+	const userId = req.userId;
+
+	connection.execute(
+		"INSERT INTO `comment` (content, userId, postId) VALUES (?,?,?)",
+		[commentContent, userId, postId],
+		function (err, result, fields) {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ error: err });
+			}
+			return res.status(200).json({ message: "commentaire bien créé !" });
+		}
+	);
+};
+
+exports.getComment = (req, res, next) => {
+	const postId = req.params.postId;
+
+	//récupération de toute les sauces de la BdD pour les afficher sur la pages
+	connection.execute(
+		"SELECT user.*, post.*, comment.*, comment.content as commentContent FROM `comment` JOIN user ON comment.userId = user.id JOIN post ON post.id = comment.postId WHERE comment.postId = ?",
+		[postId],
+		function (err, result, fields) {
+			console.log(err);
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ error: err });
+			}
+			return res.status(200).json({
+				message: "comments bien récupéré !",
+				comments: result,
+			});
+		}
+	);
+};
 
 // exports.setLike = async (req, res, next) => {
 // 	// fonction qui gère les likes

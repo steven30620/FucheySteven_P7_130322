@@ -1,11 +1,11 @@
 <template>
 <form  @submit.prevent="onSubmit" >
-    <button type="button" class="button btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="button btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="showModal = true">
     <span> Faire une publication </span>
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div v-if="showModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
                 <div class="modal-header">
@@ -16,6 +16,8 @@
                 <div class="modal-body">
                     <textarea v-model="postContent" id="post-content" rows="4" maxlength="300" placeholder="Texte de votre publication" ></textarea>
                 </div>
+
+                <input type="file">
                 <div id="upload">
                     <button id="upload-image"><i class="fa-solid fa-image "></i></button>
                 </div>
@@ -41,6 +43,8 @@ export default {
         return{
             postTitle:'',
             postContent:'',
+            image: 'couou',
+            showModal: false
         };
     },
 
@@ -58,8 +62,9 @@ export default {
                 headers: { Authorization: `Bearer ${token}` }
                 };
             
-            const response = await axios.post('http://localhost:3000/api/publication', { title: this.postTitle, content: this.postContent },config);
-            console.log(response);
+            await axios.post('http://localhost:3000/api/publication', { postTitle: this.postTitle, postContent: this.postContent, postImage: this.image },config);
+            this.$emit('reloadPosts')
+            this.showModal = false
         } catch (error) {
             console.log(error);
            

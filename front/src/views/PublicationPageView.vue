@@ -1,15 +1,15 @@
 <template>
+<div>
     <div id="userHubPlaceholder">
         <UserHubComponent/>
     </div>
 	<div id="main-page-body">
 		<div id="publication-placeholder">
-            <PublicationSubmitComponent/>
-		<div id="publication-display">
-			<PublicationDisplayComponent/>
-		</div>	
-		</div>
+            <PublicationSubmitComponent @reloadPosts="getAllPost"/>
+			<PublicationDisplayComponent v-for="post in posts" :key="post.id" :post="post"/>	
+			</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -17,17 +17,40 @@ import PublicationDisplayComponent from "../components/publication/PublicationDi
 import UserHubComponent from "../components/header/UserHubComponent.vue"
 import PublicationSubmitComponent from "../components/publication/PublicationSubmitComponent.vue"
 
-
-
-
+import axios from 'axios'
 
 export default {
+
 	name: "RegisterView",
 	components: {
 		PublicationDisplayComponent,
         UserHubComponent,
         PublicationSubmitComponent,
 	},
+	data() {
+		return {
+			posts: []
+		}
+	},
+	methods: {
+		getAllPost: async function () {
+			try {
+				const token = localStorage.getItem("jwt")
+
+				const config = {
+					headers: { Authorization: `Bearer ${token}` }
+                };
+
+				const response = await axios.get('http://localhost:3000/api/publication', config);
+				this.posts = response.data.posts
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	},
+	async mounted() {
+		await this.getAllPost()
+	}
 };
 </script>
 
@@ -41,7 +64,6 @@ export default {
 	margin-top: 50px;
 	background-color: rgb(240, 153, 71);
 	width: 1000px;
-	
 	display: flex;
 	align-items: center;
 	flex-direction: column;
