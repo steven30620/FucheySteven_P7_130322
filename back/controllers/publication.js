@@ -9,7 +9,6 @@ exports.createPost = (req, res, next) => {
 		usersLiked: [],
 		imageUrl: "http://localhost:3000/" + req.file.path.replace("\\", "/"), //ajout de l'image dans la base de données
 	};
-
 	const postTitle = req.body.postTitle;
 	const postContent = req.body.postContent;
 	const postImage = req.body.postImage;
@@ -21,11 +20,10 @@ exports.createPost = (req, res, next) => {
 	});
 
 	connection.execute(
-		"INSERT INTO `post` (title,content , image, userId) VALUES (?,?,?,?)",
+		"INSERT INTO `post` (title ,content ,image , userId) VALUES (?,?,?,?)",
 		[title, content, image, userId],
 		function (err, result, fields) {
 			if (err) {
-				console.log("ici meme");
 				return res.status(500).json({ error: err });
 			}
 			return res.status(200).json({ message: "post bien créé !" });

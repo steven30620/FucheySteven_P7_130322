@@ -1,4 +1,9 @@
 <template>
+    <button type="button" class="button btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <span> Faire une publication </span>
+    </button>
+
+    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -39,6 +44,10 @@ export default {
 
 <style lang="scss" scoped>
 
+#exampleModal{
+    position: absolute;
+
+}
 
 
 
