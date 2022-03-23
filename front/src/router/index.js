@@ -10,7 +10,7 @@ const routes = [
 	},
 
 	{
-		path: "/publicationPage",
+		path: "/publication",
 		name: "publicationPage",
 		component: MainPageView,
 	},
@@ -19,6 +19,18 @@ const routes = [
 const router = createRouter({
 	history: createWebHashHistory(),
 	routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+	const token = localStorage.getItem("jwt");
+
+	if (!token && to.name !== "register") {
+		return { name: "register" };
+	}
+	if (token && to.name == "register") {
+		return false;
+	}
+	next();
 });
 
 export default router;

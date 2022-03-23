@@ -1,7 +1,16 @@
 <template>
-<div class="userHub">
-    <div>la photo</div>
-    <div>le logo </div>
+<div id="userHub" v-if="isConnected">
+    <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="user-name">{{fullname}} </p>
+                <span id="gear"> <i class="fa-solid fa-gear fa-2x"></i></span>
+                 
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Modifier le profil</a></li>
+                <li><a class="dropdown-item" @click="logout" href="#">Se déconnecter</a></li>
+            </ul>
+        </div>
 </div>
 </template>
 
@@ -9,24 +18,58 @@
 
 
 export default {
-    name: 'UserHubComponent'
-   
-}
+   name: 'userHubComponent',
+   components: {},
+   data() {
+      return {};
+   },
+   methods: {
+      isConnected: function () {
+         return localStorage.getItem('jwt');
+      },
+
+      logout: function (){
+          return localStorage.removeItem("jwt") & localStorage.removeItem("jwt")
+      }
+   },
+   computed: {
+      fullname: function () {
+         const user = JSON.parse(localStorage.getItem('user'));
+
+         if (user) {
+            return user.lastname + ' ' + user.firstname;
+         }
+
+         return '';
+      }
+   }
+};
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 
-.userHub {
+.btn{
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    width: 100px;
-    padding: 5px 10px 5px 10px;
-    border: black solid 2px;
-    position: absolute;
-    right: 50px;
-
+    background-color: rgb(218, 115, 47);
+    
 }
+
+.user-name{
+    font-size: 20px;
+    height: 15px;
+}
+
+.dropdown-toggle::after{
+    display: none;
+}
+
+#gear{
+    margin-left: 10px;
+}
+
 
 
 

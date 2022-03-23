@@ -1,22 +1,19 @@
 <template>
-  <nav>
+   <nav>
       <img src="../../assets/logo_groupomania/logoHeader.svg">
-      <div id="userHub">
-      </div>
-  </nav>
-
-
+   </nav>
 </template>
 
 <script>
 
 
 export default {
-  name: 'HeaderComponent',
-  components:{
+   name: 'HeaderComponent',
+   components: {
+      
+   },
    
-  }
-}
+};
 
 </script>
 
@@ -24,26 +21,22 @@ export default {
 
 
 nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: solid 5px ;
-  border-radius: 10px;
-  border-block-color: #F78A21;
-  margin-bottom: 5px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-bottom: solid 5px;
+   border-radius: 10px;
+   border-block-color: #F78A21;
+   margin-bottom: 5px;
+   height: 100px;
 }
 
 img {
-  padding: 10px;
-  height: 60px;
-  width: 50%;
+   padding: 10px;
+   height: 80px;
+   width: 50%;
 }
 
-#userHub {
-  position: absolute;
-  right: 18px;
-  top: 25px;
 
-}
 
 </style>

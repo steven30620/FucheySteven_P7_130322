@@ -1,27 +1,133 @@
 <template>
-    <div id="main-signin">
-            <SignUpComponent/>
-    </div>
+	<div id="main-signin">
+		<div class="body">
+			<div id="back">
+				<div class="illustration">
+					<img src="../assets/logo_groupomania/icon.svg" alt="logo" />
+				</div>
+				<div id="placeholderComponent">
+					<div id="headerSignup">
+						<button
+							id="signup"
+							@click="changeComponent('SignUpFormComponent')"
+							:class="{
+								selected:
+									currentComponent === 'SignUpFormComponent',
+							}"
+						>
+							S'inscrire
+						</button>
+						<button
+							id="signin"
+							@click="changeComponent('SignInFormComponent')"
+							:class="{
+								selected:
+									currentComponent === 'SignInFormComponent',
+							}"
+						>
+							Se connecter
+						</button>
+					</div>
+					<component
+						:is="currentComponent"
+						@signin="signin"
+						@signup="signup"
+					></component>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import SignUpComponent from '../components/acceuil/SignUpComponent.vue'
+import SignUpFormComponent from "../components/accueil/SignUpFormComponent.vue";
+import SignInFormComponent from "../components/accueil/SignInFormComponent.vue";
 
 export default {
-    name : 'RegisterView',  
-    components:{
-        SignUpComponent
-    }  
-
-}
+	name: "RegisterView",
+	components: {
+		SignUpFormComponent,
+		SignInFormComponent,
+	},
+	data() {
+		return {
+			currentComponent: "SignUpFormComponent",
+		};
+	},
+	methods: {
+		changeComponent: function (component) {
+			this.currentComponent = component;
+		},
+		signin: function () {
+			this.$router.push("/publication");
+		},
+		signup: function () {
+			this.$router.push("/publication");
+		},
+	},
+};
 </script>
 
-<style scopped>
- 
- #main-signin{
-     
-     display: flex;
-     justify-content: center;
- }
- 
+<style scoped lang="scss">
+.selected {
+	background: linear-gradient(
+		0deg,
+		rgb(250, 215, 140) 0%,
+		rgb(240, 172, 100) 25%
+	);
+}
+
+#headerSignup {
+	margin-right: 40px;
+}
+
+#main-signin {
+	display: flex;
+	justify-content: center;
+}
+
+#back {
+	margin-top: 70px;
+	display: flex;
+	align-items: center;
+	border-radius: 20px;
+	height: 700px;
+	background-image: url("../assets/illustration/back.png");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+button {
+	position: relative;
+	background-color: #f3942e;
+	border: 1px solid #000000;
+	color: #eeeeee;
+	text-align: center;
+	font-size: 18px;
+	padding: 15px;
+	width: 50%;
+	transition: all 0.5s;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f7c2f9;
+	}
+}
+
+img {
+	height: 600px;
+	padding-left: 20px;
+	object-fit: cover;
+}
+
+#signin {
+	border: none;
+	border-top-right-radius: 15px;
+}
+
+#signup {
+	border-top-left-radius: 15px;
+	border: none;
+	border-right: 2px solid black;
+}
 </style>
