@@ -7,33 +7,33 @@
                  
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item"><SettingsComponent/></a></li>
-                <li><a class="dropdown-item" @click="logout" >Se déconnecter</a></li>
+                <li><a class="dropdown-item">Paramètres</a></li>
+                <li><a class="dropdown-item" @click="logout" href="#">Se déconnecter</a></li>
             </ul>
         </div>
 </div>
 </template>
 
 <script>
-import SettingsComponent from './SettingsComponent.vue'
+
 
 export default {
    name: 'userHubComponent',
    components: {
-       SettingsComponent
+       
    },
 
    data() {
       return {};
    },
-   
+
    methods: {
       isConnected: function () {
          return localStorage.getItem('jwt');
       },
 
       logout: function (){
-          return localStorage.removeItem("jwt") & localStorage.removeItem("jwt")
+          return localStorage.removeItem("jwt") & localStorage.removeItem("user")
       }
    },
    computed: {
@@ -64,6 +64,10 @@ export default {
 .user-name{
     font-size: 20px;
     height: 15px;
+}
+
+.dropdown-item{
+    cursor: pointer;
 }
 
 .dropdown-toggle::after{

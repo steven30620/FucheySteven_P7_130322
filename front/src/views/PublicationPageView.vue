@@ -5,19 +5,26 @@
 	<div id="main-page-body">
 		<div id="publication-placeholder">
             <PublicationSubmitComponent/>
-			
+		<div id="publication-display">
+			<PublicationDisplayComponent/>
+		</div>	
 		</div>
 	</div>
 </template>
 
 <script>
-// import PublicationDisplayComponent from "../components/publication/PublicationDisplayComponent.vue";
+import PublicationDisplayComponent from "../components/publication/PublicationDisplayComponent.vue";
 import UserHubComponent from "../components/header/UserHubComponent.vue"
 import PublicationSubmitComponent from "../components/publication/PublicationSubmitComponent.vue"
+
+
+
+
+
 export default {
 	name: "RegisterView",
 	components: {
-		// PublicationDisplayComponent,
+		PublicationDisplayComponent,
         UserHubComponent,
         PublicationSubmitComponent,
 	},

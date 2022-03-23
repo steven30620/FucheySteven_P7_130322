@@ -2,15 +2,23 @@
 
    <div id="publication-area">
       <div id="publication-header">
-         <HeaderPublicationComponent/>
+         nome user
+         <!-- <HeaderPublicationComponent/> -->
       </div>
       <div id="publication-body">
-         <EditBodyPublicationComponent/>
+         zone de text
+         <!-- <EditBodyPublicationComponent/> -->
          <!-- component de la section texte ou photo -->
       </div>
       <div id="publication-footer">
-         <FooterPublicationComponent/>
-         <CommentPublicationComponent/>
+         <div id="publication-like">
+            <button>like</button>
+         </div>
+         <div id="publication-comment">
+            test
+         </div>
+         <!-- <FooterPublicationComponent/> -->
+         <!-- <CommentPublicationComponent/> -->
       </div>
    </div>
 
@@ -18,21 +26,25 @@
 
 
 <script>
-import EditBodyPublicationComponent from '@/components/publication/EditBodyPublicationComponent';
-import HeaderPublicationComponent from '@/components/publication/HeaderPublicationComponent';
-import FooterPublicationComponent from '@/components/publication/FooterPublicationComponent';
-import CommentPublicationComponent from '@/components/publication/CommentPublicationComponent';
+// import EditBodyPublicationComponent from '@/components/publication/EditBodyPublicationComponent';
+// import HeaderPublicationComponent from '@/components/publication/HeaderPublicationComponent';
+// import FooterPublicationComponent from '@/components/publication/FooterPublicationComponent';
+// import CommentPublicationComponent from '@/components/publication/CommentPublicationComponent';
 
 export default {
    name: 'PublicationComponent',
-   components: { CommentPublicationComponent, FooterPublicationComponent, HeaderPublicationComponent, EditBodyPublicationComponent }
+   components: { 
+      // CommentPublicationComponent, FooterPublicationComponent, HeaderPublicationComponent, EditBodyPublicationComponent
+       }
 };
 </script>
 
 <style lang="scss" scoped>
 
-#publication-area {
-   margin-top: 50px;
+
+#publication{
+&-area {
+   margin-top: 20px;
    margin-bottom: 50px;
    width: 700px;
    height: 250px;
@@ -40,22 +52,20 @@ export default {
    border-radius: 10px;
    background-color: #d8f3f2;
 }
-
-#publication-header {
+&-header {
    display: flex;
    align-items: center;
    border-bottom: 2px solid black;
    height: 50px;
-}
-
-#publication-body {
+   }
+&-body {
    width: 100%;
+   height: 100px;
 }
-
-
-#publication-footer {
+&-footer {
    border-top: 2px solid black;
+   height: 20px;
 }
-
+}
 
 </style>
