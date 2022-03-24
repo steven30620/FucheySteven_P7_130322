@@ -12,7 +12,7 @@ router.post("/comment", auth, publicationCtrl.createComment);
 router.get("/comment/:postId", auth, publicationCtrl.getComment);
 // router.get("/:id", auth, publicationCtrl.getOneSauce);
 // router.put("/:id", auth, multer, publicationCtrl.modifySauce);
-// router.delete("/:id", auth, publicationCtrl.deleteSauce);
+router.delete("/:id", auth, publicationCtrl.deletePost);
 // router.post("/:id/like", auth, publicationCtrl.setLike);
 
 module.exports = router;

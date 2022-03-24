@@ -1,11 +1,11 @@
 <template>
 <form  @submit.prevent="onSubmit" >
-    <button type="button" class="button btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="showModal = true">
+    <button type="button" class="button btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <span> Faire une publication </span>
     </button>
 
     <!-- Modal -->
-    <div v-if="showModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
                 <div class="modal-header">
@@ -44,7 +44,7 @@ export default {
             postTitle:'',
             postContent:'',
             image: 'couou',
-            showModal: false
+            
         };
     },
 
@@ -64,7 +64,6 @@ export default {
             
             await axios.post('http://localhost:3000/api/publication', { postTitle: this.postTitle, postContent: this.postContent, postImage: this.image },config);
             this.$emit('reloadPosts')
-            this.showModal = false
         } catch (error) {
             console.log(error);
            

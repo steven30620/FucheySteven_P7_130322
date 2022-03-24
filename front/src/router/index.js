@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import RegisterView from "../views/RegisterView.vue";
 import MainPageView from "../views/PublicationPageView.vue";
-// import SettingsView from "../views/SettingsView.vue";
 
 const routes = [
 	{
@@ -15,12 +14,6 @@ const routes = [
 		name: "publicationPage",
 		component: MainPageView,
 	},
-
-	// {
-	// 	path: "/settings",
-	// 	name: "settingPage",
-	// 	component: SettingsView,
-	// },
 ];
 
 const router = createRouter({

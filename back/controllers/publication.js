@@ -56,22 +56,32 @@ exports.createPost = (req, res, next) => {
 // 		.catch((error) => res.status(400).json({ error }));
 // };
 
-// exports.deleteSauce = (req, res, next) => {
-// 	// trouve la sauce séléctionné et la supprime
-// 	Sauce.findOne({ _id: req.params.id })
-// 		.then((sauce) => {
-// 			const filename = sauce.imageUrl.split("/images/")[1];
-// 			fs.unlink(`images/${filename}`, () => {
-// 				//methode permettant la suppression de l'image de la BdD
-// 				Sauce.deleteOne({ _id: req.params.id }) //suppression de la sauce qui correspond a l'id de la requête de la BdD
-// 					.then(() =>
-// 						res.status(200).json({ message: "Objet supprimé !" })
-// 					)
-// 					.catch((error) => res.status(400).json({ error }));
-// 			});
-// 		})
-// 		.catch((error) => res.status(500).json({ error }));
-// };
+exports.deletePost = (req, res, next) => {
+	const postId = req.params.id;
+	// trouve la sauce séléctionné et la supprime
+	"DELETE FROM `post` WHERE `post`.`id` = ? ",
+		[postId],
+		function (err, result, fields) {
+			console.log(err);
+			if (err) {
+				return res.status(500).json({ error: err });
+			}
+			return res
+				.status(200)
+				.json({ message: "post bien récupéré !", posts: result });
+		};
+
+	// 	fs.unlink(`images/${filename}`, () => {
+	// 		//methode permettant la suppression de l'image de la BdD
+	// 		Sauce.deleteOne({ _id: req.params.id }) //suppression de la sauce qui correspond a l'id de la requête de la BdD
+	// 			.then(() =>
+	// 				res.status(200).json({ message: "Objet supprimé !" })
+	// 			)
+	// 			.catch((error) => res.status(400).json({ error }));
+	// 	});
+	// })
+	// .catch((error) => res.status(500).json({ error }));
+};
 
 exports.getAllPosts = (req, res, next) => {
 	//récupération de toute les sauces de la BdD pour les afficher sur la pages

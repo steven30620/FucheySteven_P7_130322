@@ -63,7 +63,7 @@ export default {
    methods: {
       onSubmit: function () {
       
-         if (!this.lastname.match('[a-zA-Z]')) {
+         if (!this.lastname.match('[a-zA-Z]*')) {
             this.lastnameError = true;
          }
           else{this.lastnameError = false;}
@@ -153,6 +153,7 @@ button {
    width: 50%;
    transition: all 0.5s;
    margin-top: 20px;
+   margin-bottom: 40px;
    border-radius: 20px;
    margin-left: 100px;
    cursor: pointer;
