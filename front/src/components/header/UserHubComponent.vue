@@ -9,13 +9,14 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item">Paramètres</a></li>
                 <li><a class="dropdown-item" @click="logout" href="#">Se déconnecter</a></li>
+                <li><a class="dropdown-item" @click="removeAccount" href="#">Supprimer mon compte</a></li>
             </ul>
         </div>
 </div>
 </template>
 
 <script>
-
+import axios from 'axios'
 
 export default {
    name: 'userHubComponent',
@@ -33,8 +34,25 @@ export default {
       },
 
       logout: function (){
-          return localStorage.removeItem("jwt") & localStorage.removeItem("user")
+          return localStorage.removeItem("jwt") && localStorage.removeItem("user")
+      },
+      removeAccount: async function (){
+          try {
+              console.log("coucou");
+            let user =   JSON.parse(localStorage.getItem("user"))
+            let token =   localStorage.getItem("jwt")
+            const config = {
+               headers: { Authorization: `Bearer ${token}` }
+            };
+
+            await axios.delete('http://localhost:3000/api/auth/'+ user.id,config);
+            this.logout();
+            this.$router.push({ name: 'register'})
+      } catch (error) {
+            console.log(error);
       }
+      }
+
    },
    computed: {
       fullname: function () {

@@ -36,9 +36,11 @@ exports.login = (req, res, next) => {
 
 					res.status(200).json({
 						user: {
+							id: results[0].id,
 							firstname: results[0].firstname,
 							lastname: results[0].lastname,
 							email: results[0].email,
+							isAdmin: results[0].isAdmin,
 						},
 						token: jwt.sign(
 							//fonction sign prend 2 argument
@@ -81,4 +83,26 @@ exports.signup = (req, res, next) => {
 		.catch((error) => res.status(500).json({ error }));
 };
 
-exports.userSettings = (req, res, next) => {};
+exports.deleteUser = (req, res, next) => {
+	const userId = req.params.id;
+
+	console.log(userId);
+	console.log(req.userId);
+
+	if (req.userId != userId) {
+		return res.status(401).json({
+			error: "Vous ne pouvez pas supprimer un compte autre que le votre",
+		});
+	}
+
+	connection.execute(
+		"DELETE FROM `user` WHERE `user`.`id` = ?",
+		[userId],
+		function (err, result, fields) {
+			if (err) {
+				return res.status(500).json({ error: err });
+			}
+			return res.status(200).json({ message: "user bien supprimé !" });
+		}
+	);
+};

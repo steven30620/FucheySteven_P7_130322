@@ -7,6 +7,6 @@ const rateLimit = require("./../middleware/rateLimit");
 //toutes les route concernant les user de l'API
 router.post("/signup", userCtrl.signup);
 router.post("/login", rateLimit, userCtrl.login);
-router.post("/userSettings", userCtrl.userSettings);
+router.delete("/:id", auth, userCtrl.deleteUser);
 
 module.exports = router;

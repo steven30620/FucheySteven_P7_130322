@@ -3,7 +3,11 @@
    <div id="publication-area">
       <div id="publication-header">
         <b>{{ post.lastname}} {{ post.firstname }} - {{ post.title }}</b>
-        <span class="button-placeholder"><button id="delet" type="button" @click="delet"><i class="fa-solid delet fa-trash-can"></i></button></span>
+        <span class="button-placeholder" >
+           <button v-if="postDeletePermission || isAdmin"  id="delete" type="button" @click="deletePost">
+              <i class="fa-solid delete fa-trash-can"></i>
+              </button>
+           </span>
       </div>
       <div id="publication-body">
          {{post.content}}
@@ -25,6 +29,7 @@
             <div class="publication-comment-list">
             <ul>
                <li v-for="comment in comments" :key="comment.id">
+                  <button id="delete" type="button" v-if="commentDeletePermission || isAdmin" @click="deleteComment(comment.id)"><i class="fa-solid delet fa-trash-can"></i></button>
                   <b>{{comment.lastname}} {{comment.firstname }}</b>  -  {{ comment.commentContent }}
                </li>
             </ul>
@@ -44,14 +49,17 @@ import axios from 'axios'
 export default {
    name: 'PublicationComponent',
    components: {
-      //  CommentPublicationComponent, FooterPublicationComponent, , EditBodyPublicationComponent
    },
+
    props: ['post'],
 
    data(){
       return{
          comment:"",
-         comments: []
+         comments: [],
+         isAdmin:false,
+         commentDeletePermission:false,
+         postDeletePermission:false
       }
    },
 
@@ -60,28 +68,36 @@ export default {
             console.log(this.post);
             this.createComment()
 
-        },
-        createComment: async function () {
-           try {
-              const token = localStorage.getItem("jwt")
-              const config = {
-                 headers: { Authorization: `Bearer ${token}` }
-                 };
-             await axios.post('http://localhost:3000/api/publication/comment', { commentContent: this.comment, postId: this.post.postId },config);
+      },
+      createComment: async function () {
+         try {
+            const token = localStorage.getItem("jwt")
+            const config = {
+               headers: { Authorization: `Bearer ${token}` }
+            };
+
+            await axios.post('http://localhost:3000/api/publication/comment', { commentContent: this.comment, postId: this.post.postId },config);
             this.comments = await this.getComment()
             this.comment = ''
-        } catch (error) {
+      } catch (error) {
             console.log(error);
-           
-         }
+      }
       },
+      checkAdmin: function(){
+         const userData = JSON.parse(localStorage.getItem('user'));
+
+         if (userData.isAdmin == 1){
+            this.isAdmin= true
+            console.log("Je suis admin"); 
+             } 
+             },
       getComment: async function () {
 			try {
 				const token = localStorage.getItem("jwt")
 
 				const config = {
 					headers: { Authorization: `Bearer ${token}` }
-                };
+            };
 
 				const response = await axios.get('http://localhost:3000/api/publication/comment/' + this.post.postId, config);
 				return response.data.comments
@@ -90,25 +106,45 @@ export default {
 			}
 		},
 
-      // delete: function(){
-      //    try {
-		// 		const token = localStorage.getItem("jwt")
+      deletePost: async function(){
+         try {
+				const token = localStorage.getItem("jwt")
 
-		// 		const config = {
-		// 			headers: { Authorization: `Bearer ${token}` }
-      //           };
+				const config = {
+					headers: { Authorization: `Bearer ${token}` }
+            };
 
-		// 		//   const response = await axios.get('http://localhost:3000/api/publication/' + this.post.postId, config);
-		// 		// return console.log(response);
-		// 	} catch (error) {
-		// 		console.log(error);
-      //    }
-      // }
+				await axios.delete('http://localhost:3000/api/publication/' + this.post.postId, config);
+				this.comments = await this.getComment()
+            this.$emit("reloadPosts") 
+			} catch (error) {
+				console.log(error);
+         }
+      },
+
+      deleteComment: async function(commentId){
+         try {
+				const token = localStorage.getItem("jwt")
+
+				const config = {
+					headers: { Authorization: `Bearer ${token}` }
+            };
+
+				await axios.delete('http://localhost:3000/api/publication/comment/' + commentId + '/post/' + this.post.id, config);
+				this.comments = await this.getComment()
+
+			} catch (error) {
+				console.log(error);
+         }
+      },
+
+   
    },
 
 
    async mounted() {
       this.comments = await this.getComment()
+      this.checkAdmin()
    }
 
 
@@ -128,7 +164,7 @@ b{
 }
 
 
-#delet{
+#delete{
    background: none;
    border: none;
    }
@@ -216,6 +252,8 @@ li{
 }
 
 #like{
+   display: flex;
+   margin-left: 20px;
    background: rgb(0, 60, 255);
    color: white;
    width: 100px;
@@ -225,9 +263,11 @@ li{
          animation-name: clignoter;
          animation-iteration-count: 3;
          transition: none;
-
 }
-
+.fa-thumbs-up{
+   margin-left: 20px;
+   margin-top: 3px;
+}
 }
 
 @keyframes clignoter {

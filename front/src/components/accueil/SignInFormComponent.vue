@@ -28,7 +28,8 @@ export default {
       return {
          email: '',
          password: '',
-         userNotFound: false
+         userNotFound: false,
+         isAdmin:false
       };
    },
    methods: {
@@ -43,7 +44,7 @@ export default {
       },
       getToken: async function () {
          try {
-            return await axios.post('http://localhost:3000/api/auth/login', { email: this.email, password: this.password });
+            return await axios.post('http://localhost:3000/api/auth/login', { email: this.email, password: this.password, isAdmin: this.isAdmin});
          } catch (error) {
             if (error) {
                 setTimeout(function(){

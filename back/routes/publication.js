@@ -10,6 +10,7 @@ router.get("/", auth, publicationCtrl.getAllPosts);
 router.post("/", auth, multer, publicationCtrl.createPost);
 router.post("/comment", auth, publicationCtrl.createComment);
 router.get("/comment/:postId", auth, publicationCtrl.getComment);
+router.delete("/comment/:id/post/:idPost", auth, publicationCtrl.deleteComment);
 // router.get("/:id", auth, publicationCtrl.getOneSauce);
 // router.put("/:id", auth, multer, publicationCtrl.modifySauce);
 router.delete("/:id", auth, publicationCtrl.deletePost);

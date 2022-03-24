@@ -17,20 +17,14 @@
                     <textarea v-model="postContent" id="post-content" rows="4" maxlength="300" placeholder="Texte de votre publication" ></textarea>
                 </div>
 
-                <input type="file">
-                <div id="upload">
-                    <button id="upload-image"><i class="fa-solid fa-image "></i></button>
-                </div>
-                
-                
+                 <button id="button-upload"><i class="fa-solid fa-image fa-2x"></i> <input  type="file" class="input-upload" >   </button>     
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" @click="submitFile" class="btn btn-primary">Save changes</button>
                 </div>
         </div>
         </div>
     </div>
-
 </form>
 </template>
 
@@ -43,8 +37,7 @@ export default {
         return{
             postTitle:'',
             postContent:'',
-            image: 'couou',
-            
+            image: null,            
         };
     },
 
@@ -66,10 +59,22 @@ export default {
             this.$emit('reloadPosts')
         } catch (error) {
             console.log(error);
-           
-         }
-      }
+        
+        }
+    },
+    uploadFile() {
+        this.Images = this.$refs.file.files[0];
+    },
 
+    submitFile() {
+        const formData = new FormData();
+        formData.append('file', this.Images);
+        const headers = { 'Content-Type': 'multipart/form-data' };
+        axios.post('https://httpbin.org/post', formData, { headers }).then((res) => {
+          res.data.files; // binary representation of the file
+          res.status; // HTTP status
+        });
+      }  
     }
 };
 </script>
@@ -140,5 +145,19 @@ export default {
 }
 
 
+#button-upload{
+    border: none;
+}
 
+.fa-image{
+    position: relative;
+    top:7px;
+    &::before{
+        color: #f4511e;
+}
+}
+
+.input-upload{
+    margin-bottom: 7px;
+}
 </style>

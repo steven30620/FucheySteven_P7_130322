@@ -6,7 +6,7 @@
 	<div id="main-page-body">
 		<div id="publication-placeholder">
             <PublicationSubmitComponent @reloadPosts="getAllPost"/>
-			<PublicationDisplayComponent v-for="post in posts" :key="post.id" :post="post"/>	
+			<PublicationDisplayComponent @reloadPosts="getAllPost" v-for="post in posts" :key="post.id" :post="post"/>	
 			</div>
 	</div>
 </div>
@@ -29,9 +29,14 @@ export default {
 	},
 	data() {
 		return {
-			posts: []
+			posts: [],
+			checkAdminRes:0,
 		}
 	},
+	props:{
+
+	},
+
 	methods: {
 		getAllPost: async function () {
 			try {
@@ -46,7 +51,7 @@ export default {
 			} catch (error) {
 				console.log(error);
 			}
-		}
+		},		
 	},
 	async mounted() {
 		await this.getAllPost()
