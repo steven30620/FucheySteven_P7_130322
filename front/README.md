@@ -1,18 +1,19 @@
-# back
-
-configurer le .env.model avec vos données, et renomer en .env
-npm install
-
-nodemon server pour le back
-
 ## Project setup Front
 
 ```
-npm install
+npm install depuis le dossier Front
 ```
+##  Project setup back
 
-### Compiles and hot-reloads for development
+npm install depuis le dossier back
+
+configurer le .env.model avec vos données de BDD, et le renomer en .env
+
+
+lancer nodemon server depuis le back
+
+## Start front 
 
 ```
-npm run serve pour le front
+npm run serve depuis le dossier front
 ```
