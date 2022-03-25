@@ -142,7 +142,6 @@ export default {
           "http://localhost:3000/api/publication/" + this.post.postId,
           config
         );
-        this.comments = await this.getComment();
         this.$emit("reloadPosts");
       } catch (error) {
         console.log(error);

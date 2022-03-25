@@ -64,9 +64,11 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Fermer
             </button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">
+              Publier mon Post !
+            </button>
           </div>
         </div>
       </div>

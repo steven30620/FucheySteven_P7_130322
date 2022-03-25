@@ -7,6 +7,7 @@
       <div id="publication-placeholder">
         <PublicationSubmitComponent @reloadPosts="getAllPost" />
         <div id="publication-area-placeholder">
+          <!-- On attribut dynamiquement les donnée des props pour chaque post -->
           <PublicationDisplayComponent
             @reloadPosts="getAllPost"
             v-for="post in posts"
@@ -54,7 +55,6 @@ export default {
           config
         );
         this.posts = response.data.posts;
-        console.log(this.posts);
       } catch (error) {
         console.log(error);
       }
