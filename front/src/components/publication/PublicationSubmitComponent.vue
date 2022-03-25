@@ -144,7 +144,6 @@ export default {
       }
     },
     onFileChange: function (e) {
-      console.log(e.target.files);
       this.postImage = e.target.files[0] || e.dataTransfer.files;
     },
   },
