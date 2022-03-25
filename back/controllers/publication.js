@@ -34,35 +34,63 @@ exports.deletePost = (req, res, next) => {
 					.status(500)
 					.json({ message: 'Impossible de supprimer le post!' });
 			}
-			res.json({ message: result });
+			const resultId = result[0];
+
+			if (resultId.userId == userId || isAdmin === true) {
+				connection.execute(
+					'DELETE FROM `post` WHERE `post`.`id` = ?',
+					[postId],
+					function (err, result, fields) {
+						if (err) {
+							console.log('coucou');
+							return res.status(500).json({ error: err });
+						}
+						return res
+							.status(200)
+							.json({ message: 'post bien supprimé !' });
+					}
+				);
+			}
+			if (err) {
+				return res.status(500).json({ error: err });
+			}
 		}
 	);
-
-	// connection.execute(
-	// 	'DELETE FROM `post` WHERE `post`.`id` = ? AND ',
-	// 	[postId],
-
-	// 	function (err, result, fields) {
-	// 		if (err) {
-	// 			return res.status(500).json({ error: err });
-	// 		}
-	// 		return res.status(200).json({ message: 'post bien supprimé !' });
-	// 	}
-	// );
 };
 
 exports.deleteComment = (req, res, next) => {
 	const commentId = req.params.id;
+	const userId = req.userId;
 
 	connection.execute(
-		'DELETE FROM `comment` WHERE `comment`.`id` = ?',
+		'SELECT `userId` FROM `comment` WHERE `id` = ?',
 		[commentId],
 		function (err, result, fields) {
 			if (err) {
+				return res
+					.status(500)
+					.json({ message: 'Impossible de supprimer le post!' });
+			}
+			const resultId = result[0];
+
+			if (resultId.userId == userId || isAdmin === true) {
+				connection.execute(
+					'DELETE FROM `comment` WHERE `comment`.`id` = ?',
+					[commentId],
+					function (err, result, fields) {
+						if (err) {
+							return res.status(500).json({ error: err });
+						}
+
+						return res
+							.status(200)
+							.json({ message: 'Commentaire bien supprimé !' });
+					}
+				);
+			}
+			if (err) {
 				return res.status(500).json({ error: err });
 			}
-
-			return res.status(200).json({ message: 'post bien supprimé !' });
 		}
 	);
 };

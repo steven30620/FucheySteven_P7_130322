@@ -6,12 +6,14 @@
     <div id="main-page-body">
       <div id="publication-placeholder">
         <PublicationSubmitComponent @reloadPosts="getAllPost" />
-        <PublicationDisplayComponent
-          @reloadPosts="getAllPost"
-          v-for="post in posts"
-          :key="post.id"
-          :post="post"
-        />
+        <div id="publication-area-placeholder">
+          <PublicationDisplayComponent
+            @reloadPosts="getAllPost"
+            v-for="post in posts"
+            :key="post.id"
+            :post="post"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -77,6 +79,12 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-radius: 10px;
+}
+#publication-area-placeholder {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
   border-radius: 10px;
 }
 

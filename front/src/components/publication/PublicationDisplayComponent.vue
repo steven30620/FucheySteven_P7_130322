@@ -171,9 +171,7 @@ export default {
     },
 
     isOwnerComment: function (commentIdUser) {
-      console.log(commentIdUser);
       const userIdLocal = JSON.parse(localStorage.getItem("user"));
-      console.log(userIdLocal.id);
       if (commentIdUser == userIdLocal.id) {
         return true;
       }
@@ -285,6 +283,8 @@ b {
 }
 
 ul {
+  display: flex;
+  flex-direction: column-reverse;
   list-style-type: none;
   padding-top: 20px;
 }
