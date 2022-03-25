@@ -1,34 +1,41 @@
-const fs = require("fs");
-const connection = require("../middleware/connection");
+const fs = require('fs');
+const connection = require('../middleware/connection');
 
 exports.createPost = (req, res, next) => {
 	const postTitle = req.body.postTitle;
 	const postContent = req.body.postContent;
-	const postImage = "ee";
+	const postImage =
+		'http://localhost:3000/' + req.file.path.replace('\\', '/');
 	const userId = req.userId;
 
+	if (postImage == 'http://localhost:3000/' + '') {
+		postImage = null;
+	}
+
 	connection.execute(
-		"INSERT INTO `post` (title ,content ,image , userId) VALUES (?,?,?,?)",
+		'INSERT INTO `post` (title ,content ,image , userId) VALUES (?,?,?,?)',
 		[postTitle, postContent, postImage, userId],
 		function (err, result, fields) {
 			if (err) {
 				return res.status(500).json({ error: err });
 			}
-			return res.status(200).json({ message: "post bien créé !" });
+			return res.status(200).json({ message: 'post bien créé !' });
 		}
 	);
 };
 
 exports.deletePost = (req, res, next) => {
 	const postId = req.params.id;
+
 	connection.execute(
-		"DELETE FROM `post` WHERE `post`.`id` = ? ",
+		'DELETE FROM `post` WHERE `post`.`id` = ? ',
 		[postId],
+
 		function (err, result, fields) {
 			if (err) {
 				return res.status(500).json({ error: err });
 			}
-			return res.status(200).json({ message: "post bien supprimé !" });
+			return res.status(200).json({ message: 'post bien supprimé !' });
 		}
 	);
 };
@@ -38,29 +45,28 @@ exports.deleteComment = (req, res, next) => {
 	const postId = req.params.idPost;
 
 	connection.execute(
-		"DELETE FROM `comment` WHERE `comment`.`id` = ?",
+		'DELETE FROM `comment` WHERE `comment`.`id` = ?',
 		[commentId],
 		function (err, result, fields) {
 			if (err) {
 				return res.status(500).json({ error: err });
 			}
-			return res.status(200).json({ message: "post bien supprimé !" });
+			return res.status(200).json({ message: 'post bien supprimé !' });
 		}
 	);
 };
 
 exports.getAllPosts = (req, res, next) => {
 	connection.execute(
-		"SELECT post.*, post.id as postId, user.* FROM `post` JOIN user ON post.userId = user.id",
+		'SELECT post.*, post.id as postId, user.* FROM `post` JOIN user ON post.userId = user.id',
 		[],
 		function (err, result, fields) {
-			console.log(err);
 			if (err) {
 				return res.status(500).json({ error: err });
 			}
 			return res
 				.status(200)
-				.json({ message: "post bien récupéré !", posts: result });
+				.json({ message: 'post bien récupéré !', posts: result });
 		}
 	);
 };
@@ -71,14 +77,14 @@ exports.createComment = (req, res, next) => {
 	const userId = req.userId;
 
 	connection.execute(
-		"INSERT INTO `comment` (content, userId, postId) VALUES (?,?,?)",
+		'INSERT INTO `comment` (content, userId, postId) VALUES (?,?,?)',
 		[commentContent, userId, postId],
 		function (err, result, fields) {
 			if (err) {
 				console.log(err);
 				return res.status(500).json({ error: err });
 			}
-			return res.status(200).json({ message: "commentaire bien créé !" });
+			return res.status(200).json({ message: 'commentaire bien créé !' });
 		}
 	);
 };
@@ -87,16 +93,15 @@ exports.getComment = (req, res, next) => {
 	const postId = req.params.postId;
 
 	connection.execute(
-		"SELECT user.*, post.*, comment.*, comment.content as commentContent FROM `comment` JOIN user ON comment.userId = user.id JOIN post ON post.id = comment.postId WHERE comment.postId = ?",
+		'SELECT user.*, post.*, comment.*, comment.content as commentContent FROM `comment` JOIN user ON comment.userId = user.id JOIN post ON post.id = comment.postId WHERE comment.postId = ?',
 		[postId],
 		function (err, result, fields) {
-			console.log(err);
 			if (err) {
 				console.log(err);
 				return res.status(500).json({ error: err });
 			}
 			return res.status(200).json({
-				message: "comments bien récupéré !",
+				message: 'comments bien récupéré !',
 				comments: result,
 			});
 		}

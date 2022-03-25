@@ -90,13 +90,12 @@ export default {
       },
       createUser: async function () {
          try {
-            const response = await axios.post('http://localhost:3000/api/auth/signup', { lastname: this.lastname, firstname: this.firstname, email: this.email, password: this.password });
+            await axios.post('http://localhost:3000/api/auth/signup', { lastname: this.lastname, firstname: this.firstname, email: this.email, password: this.password });
             if(this.userAlreadyExist !== true)
                setTimeout(function(){
                   this.userCreated = false}.bind(this),3000
                )
                this.userCreated = true;  
-            console.log(response);
          } catch (error) {
             setTimeout(function(){
                   this.userAlreadyExist = false}.bind(this),3000

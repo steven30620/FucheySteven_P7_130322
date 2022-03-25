@@ -86,9 +86,6 @@ exports.signup = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
 	const userId = req.params.id;
 
-	console.log(userId);
-	console.log(req.userId);
-
 	if (req.userId != userId) {
 		return res.status(401).json({
 			error: "Vous ne pouvez pas supprimer un compte autre que le votre",

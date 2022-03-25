@@ -38,7 +38,6 @@ export default {
       },
       removeAccount: async function (){
           try {
-              console.log("coucou");
             let user =   JSON.parse(localStorage.getItem("user"))
             let token =   localStorage.getItem("jwt")
             const config = {
