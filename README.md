@@ -1,27 +1,27 @@
 ## Project setup Front
 
-Depuis le dossier Front
+-Depuis le dossier Front
 
 ```
 npm install 
 ```
 ##  Project setup back
 
-Depuis le dossier back
+-Depuis le dossier back
 
 ```
 npm install 
 ```
-configurer le .env.model avec vos données de BDD, et le renomer en .env
+-Configurer le .env.model avec vos données de BDD, et le renomer en .env
 
-lancer  depuis le back
+-Puis lancez  depuis le back
 ```
 nodemon server
 ```
 
 ## Start front 
 
-Depuis le dossier front
+-Depuis le dossier front
 
 ```
 npm run serve 
