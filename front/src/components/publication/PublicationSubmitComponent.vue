@@ -273,4 +273,13 @@ export default {
     opacity: 1;
   }
 }
+
+@media all and (max-width: 1250px) {
+  #empty-content {
+    margin-left: 60px;
+  }
+  #publication-send {
+    margin-left: 60px;
+  }
+}
 </style>

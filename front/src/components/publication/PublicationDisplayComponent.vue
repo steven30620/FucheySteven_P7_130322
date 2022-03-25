@@ -195,7 +195,7 @@ b {
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 50px;
-    width: 700px;
+    width: 90%;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -297,6 +297,12 @@ li {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media all and (max-width: 1250px) {
+  #publication {
+    max-width: 100%;
   }
 }
 </style>
