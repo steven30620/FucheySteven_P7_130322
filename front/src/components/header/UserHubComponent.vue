@@ -12,7 +12,7 @@
         <span id="gear"> <i class="fa-solid fa-gear fa-2x"></i></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item">Paramètres</a></li>
+        <li><a class="dropdown-item">Paramètres (inactif)</a></li>
         <li>
           <a class="dropdown-item" @click="logout" href="#">Se déconnecter</a>
         </li>
@@ -34,7 +34,7 @@
         <span id="gear"> <i class="fa-solid fa-gear fa-2x"></i></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item">Paramètres</a></li>
+        <li><a class="dropdown-item">Paramètres (inactif)</a></li>
         <li>
           <a class="dropdown-item" @click="logout" href="#">Se déconnecter</a>
         </li>

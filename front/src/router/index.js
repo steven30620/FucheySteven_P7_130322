@@ -29,8 +29,9 @@ router.beforeEach(async (to, from, next) => {
 		return { name: 'register' };
 	}
 	if (token && to.name == 'register') {
-		return false;
+		return { name: 'register' };
 	}
+
 	next();
 });
 

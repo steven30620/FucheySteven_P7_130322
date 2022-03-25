@@ -32,7 +32,7 @@
           <div class="empty-comment" v-if="emptyComment">
             Minimum 3 caractère !
           </div>
-          <form @submit.prevent="onSubmit">
+          <form @submit.prevent="onSubmit" class="input-placeholder">
             <input type="text" maxlength="50" v-model="comment" />
             <button type="submit">envoyer</button>
           </form>
@@ -224,7 +224,7 @@ b {
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 50px;
-    width: 90%;
+    max-width: 70%;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
@@ -266,13 +266,11 @@ b {
     display: flex;
     align-content: flex-start;
     flex-direction: column;
-    min-width: 200px;
-    max-width: 100%;
+    min-width: 100%;
     min-height: 40px;
     margin-top: 10px;
     &-input {
-      position: relative;
-      left: 20px;
+      position: center;
     }
     &-list {
       display: flex;
@@ -287,15 +285,17 @@ ul {
   flex-direction: column-reverse;
   list-style-type: none;
   padding-top: 20px;
+  padding-inline-start: 0px;
+  min-width: 100%;
 }
 
 li {
-  display: flex;
-  align-items: flex-start;
-  max-width: 100%;
-  max-height: 30px;
+  min-width: 100%;
+  min-height: 50px;
   border-bottom: 2px solid black;
-  margin-bottom: 20px;
+  border-top: 2px solid black;
+  padding-bottom: 20px;
+  padding-top: 20px;
   padding-right: 10px;
   background: rgb(243, 195, 34);
 }
@@ -331,9 +331,19 @@ li {
   }
 }
 
-@media all and (max-width: 1250px) {
+@media all and (max-width: 850px) {
   #publication {
-    max-width: 100%;
+    &-area {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      max-width: 90%;
+    }
+  }
+
+  #publication-comment {
+    padding: 0px;
   }
 }
 </style>
