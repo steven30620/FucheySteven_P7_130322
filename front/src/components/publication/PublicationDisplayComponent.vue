@@ -4,7 +4,7 @@
       <b>{{ post.lastname }} {{ post.firstname }} - {{ post.title }}</b>
       <span class="button-placeholder">
         <button
-          v-if="postDeletePermission || isAdmin"
+          v-if="isOwnerPost || isAdmin"
           id="delete"
           type="button"
           @click="deletePost"
@@ -43,7 +43,7 @@
               <button
                 id="delete"
                 type="button"
-                v-if="commentDeletePermission || isAdmin"
+                v-if="isOwnerComment(comment.userId) || isAdmin"
                 @click="deleteComment(comment.id)"
               >
                 <i class="fa-solid delet fa-trash-can"></i>
@@ -72,7 +72,6 @@ export default {
       comment: "",
       comments: [],
       isAdmin: false,
-      commentDeletePermission: false,
       postDeletePermission: false,
       emptyComment: false,
     };
@@ -169,6 +168,28 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    isOwnerComment: function (commentIdUser) {
+      console.log(commentIdUser);
+      const userIdLocal = JSON.parse(localStorage.getItem("user"));
+      console.log(userIdLocal.id);
+      if (commentIdUser == userIdLocal.id) {
+        return true;
+      }
+      return false;
+    },
+  },
+
+  computed: {
+    isOwnerPost: function () {
+      const userIdLocal = JSON.parse(localStorage.getItem("user"));
+      const postUserId = this.post.userId;
+
+      if (postUserId == userIdLocal.id) {
+        return true;
+      }
+      return false;
     },
   },
 

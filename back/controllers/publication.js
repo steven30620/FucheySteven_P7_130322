@@ -8,10 +8,6 @@ exports.createPost = (req, res, next) => {
 		'http://localhost:3000/' + req.file.path.replace('\\', '/');
 	const userId = req.userId;
 
-	if (postImage == 'http://localhost:3000/' + '') {
-		postImage = null;
-	}
-
 	connection.execute(
 		'INSERT INTO `post` (title ,content ,image , userId) VALUES (?,?,?,?)',
 		[postTitle, postContent, postImage, userId],
@@ -26,23 +22,37 @@ exports.createPost = (req, res, next) => {
 
 exports.deletePost = (req, res, next) => {
 	const postId = req.params.id;
+	const userId = req.userId;
+	const isAdmin = req.isAdmin;
 
 	connection.execute(
-		'DELETE FROM `post` WHERE `post`.`id` = ? ',
+		'SELECT `userId` FROM `post` WHERE `id` = ?',
 		[postId],
-
 		function (err, result, fields) {
 			if (err) {
-				return res.status(500).json({ error: err });
+				return res
+					.status(500)
+					.json({ message: 'Impossible de supprimer le post!' });
 			}
-			return res.status(200).json({ message: 'post bien supprimé !' });
+			res.json({ message: result });
 		}
 	);
+
+	// connection.execute(
+	// 	'DELETE FROM `post` WHERE `post`.`id` = ? AND ',
+	// 	[postId],
+
+	// 	function (err, result, fields) {
+	// 		if (err) {
+	// 			return res.status(500).json({ error: err });
+	// 		}
+	// 		return res.status(200).json({ message: 'post bien supprimé !' });
+	// 	}
+	// );
 };
 
 exports.deleteComment = (req, res, next) => {
 	const commentId = req.params.id;
-	const postId = req.params.idPost;
 
 	connection.execute(
 		'DELETE FROM `comment` WHERE `comment`.`id` = ?',
@@ -51,6 +61,7 @@ exports.deleteComment = (req, res, next) => {
 			if (err) {
 				return res.status(500).json({ error: err });
 			}
+
 			return res.status(200).json({ message: 'post bien supprimé !' });
 		}
 	);
@@ -81,7 +92,6 @@ exports.createComment = (req, res, next) => {
 		[commentContent, userId, postId],
 		function (err, result, fields) {
 			if (err) {
-				console.log(err);
 				return res.status(500).json({ error: err });
 			}
 			return res.status(200).json({ message: 'commentaire bien créé !' });

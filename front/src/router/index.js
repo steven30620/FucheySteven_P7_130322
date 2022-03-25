@@ -26,7 +26,6 @@ router.beforeEach(async (to, from, next) => {
 	const token = localStorage.getItem('jwt');
 
 	if (!token && to.name !== 'register') {
-		next();
 		return { name: 'register' };
 	}
 	if (token && to.name == 'register') {

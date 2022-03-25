@@ -229,12 +229,13 @@ export default {
 }
 
 #empty-content {
+  position: relative;
+  left: 130px;
   display: flex;
   background: rgb(242, 56, 15);
   color: white;
   width: 250px;
   height: 55px;
-  margin-left: 120px;
   font-size: 20px;
   align-items: center;
   justify-content: center;
@@ -246,12 +247,13 @@ export default {
 }
 
 #publication-send {
+  position: relative;
+  left: 130px;
   display: flex;
   background: rgb(21, 170, 34);
   color: white;
   width: 250px;
   height: 40px;
-  margin-left: 120px;
   font-size: 20px;
   align-items: center;
   justify-content: center;
@@ -274,12 +276,13 @@ export default {
   }
 }
 
-@media all and (max-width: 1250px) {
+@media all and (max-width: 450px) {
   #empty-content {
-    margin-left: 60px;
+    left: 70px;
   }
+
   #publication-send {
-    margin-left: 60px;
+    left: 70px;
   }
 }
 </style>
