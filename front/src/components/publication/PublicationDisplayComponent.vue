@@ -29,6 +29,9 @@
       </div>
       <div id="publication-comment">
         <div id="publication-comment-input">
+          <div class="empty-comment" v-if="emptyComment">
+            Minimum 3 caractère !
+          </div>
           <form @submit.prevent="onSubmit">
             <input type="text" maxlength="50" v-model="comment" />
             <button type="submit">envoyer</button>
@@ -71,6 +74,7 @@ export default {
       isAdmin: false,
       commentDeletePermission: false,
       postDeletePermission: false,
+      emptyComment: false,
     };
   },
 
@@ -79,6 +83,12 @@ export default {
       this.createComment();
     },
     createComment: async function () {
+      if (!this.comment.match("[A-Za-z1-9]{3,}")) {
+        return (this.emptyComment = true);
+      } else {
+        this.emptyComment = false;
+      }
+
       try {
         const token = localStorage.getItem("jwt");
         const config = {
