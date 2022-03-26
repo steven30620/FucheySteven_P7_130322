@@ -74,7 +74,7 @@ export default {
 
 #publication-placeholder {
   margin-top: 50px;
-  background-color: rgb(240, 153, 71);
+  background-color: rgb(242, 227, 227);
   max-width: 65%;
   display: flex;
   align-items: center;

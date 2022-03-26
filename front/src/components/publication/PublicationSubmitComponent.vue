@@ -157,7 +157,7 @@ export default {
 
 .button {
   border-radius: 4px;
-  background-color: #f4511e;
+  background-color: #ff0000;
   border: none;
   color: #ffffff;
   text-align: center;
@@ -195,11 +195,12 @@ export default {
 
 .modal {
   &-header {
-    border: solid 2px rgb(220, 158, 67);
+    border-bottom: solid 2px rgb(255, 0, 0);
   }
 
   &-content {
-    background: #f5dfd8;
+    background: #c7bcb9;
+    border: solid 2px rgb(255, 0, 0);
   }
 }
 
@@ -220,8 +221,9 @@ export default {
 .fa-image {
   position: relative;
   top: 7px;
+  left: -10px;
   &::before {
-    color: #f4511e;
+    color: #ff0000;
   }
 }
 

@@ -1,19 +1,12 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const connection = require('../middleware/connection');
-const MaskData = require('maskdata');
-//maskdata is a Node.js module to mask various kinds of data. With the help of maskdata, you can mask email, phone number, card number, JSON fields, password etc..
-const emailMaskOptions = {
-	maskWith: '*',
-	unmaskedStartCharactersBeforeAt: 1,
-	unmaskedEndCharactersAfterAt: 2,
-	maskAtTheRate: false,
-};
+const user = require('../models/userModel');
 
 exports.login = (req, res, next) => {
 	connection.execute(
 		'SELECT * FROM `user` WHERE `email` = ?',
-		[MaskData.maskEmail2(req.body.email, emailMaskOptions)],
+		[req.body.email],
 		function (err, results, fields) {
 			if (err) {
 				return res.status(500).json({ error: err });
@@ -63,7 +56,7 @@ exports.signup = (req, res, next) => {
 	const lastname = req.body.lastname;
 	const firstname = req.body.firstname;
 	const password = req.body.password;
-	const email = MaskData.maskEmail2(req.body.email, emailMaskOptions);
+	const email = req.body.email;
 	// on récupère dans les variable les information que l'on vas envoyé dans la BDD, en les récupérant de la requete
 
 	bcrypt // création d'un mot de passe hashé

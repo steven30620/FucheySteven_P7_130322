@@ -289,6 +289,7 @@ ul {
 }
 
 li {
+  color: white;
   min-width: 100%;
   min-height: 50px;
   border-bottom: 2px solid black;
@@ -296,7 +297,7 @@ li {
   padding-bottom: 20px;
   padding-top: 20px;
   padding-right: 10px;
-  background: rgb(243, 195, 34);
+  background: rgb(255, 0, 0);
 }
 
 #like {

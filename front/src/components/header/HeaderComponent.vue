@@ -18,7 +18,7 @@ nav {
   justify-content: center;
   border-bottom: solid 5px;
   border-radius: 10px;
-  border-block-color: #f78a21;
+  border-block-color: #f72121;
   margin-bottom: 5px;
   height: 100px;
 }

@@ -70,11 +70,7 @@ export default {
 
 <style scoped lang="scss">
 .selected {
-  background: linear-gradient(
-    0deg,
-    rgb(250, 215, 140) 0%,
-    rgb(240, 172, 100) 25%
-  );
+  background: linear-gradient(0deg, rgb(7, 31, 128) 0%, rgb(3, 51, 240) 25%);
 }
 
 #headerSignup {
@@ -99,8 +95,7 @@ export default {
 
 button {
   position: relative;
-  background-color: #f3942e;
-  border: 1px solid #000000;
+  background-color: rgb(7, 31, 128);
   color: #eeeeee;
   text-align: center;
   font-size: 18px;
@@ -121,14 +116,16 @@ img {
 }
 
 #signin {
-  border: none;
+  border: solid 2px red;
+  border-bottom: none;
   border-top-right-radius: 15px;
 }
 
 #signup {
   border-top-left-radius: 15px;
-  border: none;
-  border-right: 2px solid black;
+  border: solid 2px red;
+  border-bottom: none;
+  border-right: 2px solid rgb(255, 0, 0);
 }
 
 @media all and (max-width: 1250px) {

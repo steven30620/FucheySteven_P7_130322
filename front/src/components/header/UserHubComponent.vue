@@ -102,7 +102,7 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(218, 115, 47);
+  background-color: rgb(255, 0, 0);
 }
 
 .user-name {

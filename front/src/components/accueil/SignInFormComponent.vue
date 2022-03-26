@@ -86,9 +86,10 @@ export default {
 }
 
 #placeholderSignup {
+  color: white;
   margin-right: 40px;
-  background-color: rgb(248, 214, 139);
-  border: 2px solid #f3c839;
+  background-color: rgb(7, 31, 128);
+  border: 2px solid #f33939;
   border-top: none;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -98,7 +99,7 @@ export default {
 
 button {
   position: relative;
-  background-color: #f3942e;
+  background-color: #f32e2e;
   border: 1px solid #000000;
   color: #eeeeee;
   text-align: center;
