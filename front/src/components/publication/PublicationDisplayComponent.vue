@@ -9,7 +9,7 @@
           type="button"
           @click="deletePost"
         >
-          <i class="fa-solid delete fa-trash-can"></i>
+          <i class="fa-solid delete fa-trash-can deletePostLogo"></i>
         </button>
       </span>
     </div>
@@ -46,7 +46,7 @@
                 v-if="isOwnerComment(comment.userId) || isAdmin"
                 @click="deleteComment(comment.id)"
               >
-                <i class="fa-solid delet fa-trash-can"></i>
+                <i class="fa-solid delet fa-trash-can deleteCommentLogo"></i>
               </button>
               <b>{{ comment.lastname }} {{ comment.firstname }}</b> -
               {{ comment.commentContent }}
@@ -202,10 +202,13 @@ b {
   padding-left: 10px;
   color: rgb(0, 0, 0);
 }
-.fa-trash-can {
-  &::before {
-    color: red;
-  }
+
+.deletePostLogo::before {
+  color: red;
+}
+
+.deleteCommentLogo::before {
+  color: rgb(255, 255, 255);
 }
 
 #delete {

@@ -68,18 +68,23 @@ export default {
       return localStorage.removeItem("jwt") && localStorage.removeItem("user");
     },
     removeAccount: async function () {
-      try {
-        let user = JSON.parse(localStorage.getItem("user"));
-        let token = localStorage.getItem("jwt");
-        const config = {
-          headers: { Authorization: `Bearer ${token}` },
-        };
+      if (confirm("Etes vous sur de vouloir supprimer le compte")) {
+        try {
+          let user = JSON.parse(localStorage.getItem("user"));
+          let token = localStorage.getItem("jwt");
+          const config = {
+            headers: { Authorization: `Bearer ${token}` },
+          };
 
-        await axios.delete("http://localhost:3000/api/auth/" + user.id, config);
-        this.logout();
-        this.$router.push({ name: "register" });
-      } catch (error) {
-        console.log(error);
+          await axios.delete(
+            "http://localhost:3000/api/auth/" + user.id,
+            config
+          );
+          this.logout();
+          this.$router.push({ name: "register" });
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },

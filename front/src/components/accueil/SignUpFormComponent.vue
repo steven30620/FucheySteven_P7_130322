@@ -91,13 +91,13 @@ export default {
   methods: {
     onSubmit: function () {
       // vérification des formulaires
-      if (!this.lastname.match("[a-zA-Z]")) {
+      if (!this.lastname.match("^[a-zA-Z]{3,}$")) {
         this.lastnameError = true;
       } else {
         this.lastnameError = false;
       }
 
-      if (!this.firstname.match("[a-zA-A]")) {
+      if (!this.firstname.match("^[a-zA-Z]{3,}$")) {
         this.firstnameError = true;
       } else {
         this.firstnameError = false;
