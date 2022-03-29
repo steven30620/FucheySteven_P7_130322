@@ -3,7 +3,10 @@
     <div class="body">
       <div id="back">
         <div class="illustration">
-          <img src="../assets/logo_groupomania/icon.svg" alt="logo" />
+          <img
+            src="../assets/logo_groupomania/icon.svg"
+            alt="logo groupomania gros milieu"
+          />
         </div>
         <div id="placeholderComponent">
           <div id="headerSignup">
@@ -70,7 +73,7 @@ export default {
 
 <style scoped lang="scss">
 .selected {
-  background: linear-gradient(0deg, rgb(7, 31, 128) 0%, rgb(3, 51, 240) 25%);
+  background: linear-gradient(0deg, rgb(7, 31, 128) 0%, rgb(255, 255, 255) 25%);
 }
 
 #headerSignup {
@@ -95,7 +98,7 @@ export default {
 
 button {
   position: relative;
-  background-color: rgb(7, 31, 128);
+  background-color: rgb(255, 255, 255);
   color: #eeeeee;
   text-align: center;
   font-size: 18px;
@@ -116,12 +119,18 @@ img {
 }
 
 #signin {
+  font-size: 25px;
   border: solid 2px red;
   border-bottom: none;
   border-top-right-radius: 15px;
+  font-weight: bold;
+  color: #000000;
 }
 
 #signup {
+  color: #000000;
+  font-size: 25px;
+  font-weight: bold;
   border-top-left-radius: 15px;
   border: solid 2px red;
   border-bottom: none;

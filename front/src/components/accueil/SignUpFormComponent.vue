@@ -192,11 +192,11 @@ export default {
 
 button {
   position: relative;
-  background-color: #f32e2e;
+  background-color: #ffffff;
   border: 1px solid #000000;
-  color: #eeeeee;
+  color: #000000;
   text-align: center;
-  font-size: 18px;
+  font-size: 25px;
   padding: 15px;
   width: 50%;
   transition: all 0.5s;

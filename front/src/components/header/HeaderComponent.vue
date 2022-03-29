@@ -1,6 +1,9 @@
 <template>
   <nav>
-    <img src="../../assets/logo_groupomania/logoHeader.svg" />
+    <img
+      src="../../assets/logo_groupomania/logoHeader.svg"
+      alt="logo_groupomania"
+    />
   </nav>
 </template>
 
